@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Car Shop</title>
+  <title>book Shop</title>
   <link rel="stylesheet" type="text/css" href="bundle.css" />
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,28 +15,29 @@
 </head>
 
 <body>
-  <h1>Car Shop</h1>
+  <h1>book Shop</h1>
   <div id="app">
     <h2>Get All</h2>
-    <button v-on:click="getAllCars" class="btn btn-primary">Get all cars</button>
+    <button v-on:click="getAllBooks" class="btn btn-primary">Get all Books</button>
 
-    <ul v-if="cars.length">
-      <li v-for="car in cars">
-        {{car.id}} {{car.vendor}} : {{car.model }} {{ car.price}}
+    <ul v-if="books.length">
+      <li v-for="book in books">
+        {{book.id}} {{book.title}} : {{book.author }} {{book.publisher }} {{ book.price}}
       </li>
     </ul>
-    <!--span v-else>No cars</span-->
+    <!--span v-else>No books</span-->
 
     <h2>Delete</h2>
-    <input class="form-control" v-model.number="deleteId" placeholder="id" type="number"/>
-    <button v-on:click="deleteCar(deleteId)" class="btn btn-warning">Delete</button>
+    <input class="form-control" v-model.number="deleteId" placeholder="id" type="number">
+    <button v-on:click="deleteBook(deleteId)" class="btn btn-warning">Delete</button>
     {{deleteMessage}}
 
     <h2>Add</h2>
-    <input v-model="formData.vodel" placeholder="model" type="text" />
-    <input v-model="formData.vendor" placeholder="vendor" type="text" />
-    <input v-model.number="formData.price" placeholder="price" type="number" />
-    <button v-on:click="addCar()" class="btn btn-success">Add</button>
+    <input v-model="formData.title" placeholder="title" type="text" >
+    <input v-model="formData.author" placeholder="author" type="text" >
+    <input v-model="formData.publisher" placeholder="publisher" type="text" >
+    <input v-model.number="formData.price" placeholder="price" type="number" >
+    <button v-on:click="addBook()" class="btn btn-success">Add</button>
     <div>{{addMessage}}</div>
   </div>
   <script src="bundle.js"></script>

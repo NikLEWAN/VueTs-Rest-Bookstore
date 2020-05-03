@@ -3,54 +3,55 @@ import axios, {
     AxiosError
 } from "../../node_modules/axios/index"
 
-interface ICar {
+interface IBook {
     id: number
-    model: string
-    vendor: string
+    title: string
+    author: string
+    publisher: string
     price: number
 }
 
-let baseUri: string = "http://anbo-carsrest.azurewebsites.net/api/cars"
+let baseUri: string = "http://anbo-bookstorerest.azurewebsites.net/api/Books"
 
 new Vue({
     el: "#app",
     data: {
-        cars: [],
+        books: [],
         errors: [],
         deleteId: 0,
         deleteMessage: "",
-        formData: { model: "", vendor: "", price: 0 },
+        formData: { title: "", author: "", publisher: "", price: 0 },
         addMessage: ""
     },
     methods: {
-        getAllCars() {
-            axios.get<ICar[]>(baseUri)
-                .then((response: AxiosResponse<ICar[]>) => {
-                    this.cars = response.data
+        getAllBooks() {
+            axios.get<IBook[]>(baseUri)
+                .then((response: AxiosResponse<IBook[]>) => {
+                    this.books = response.data
                 })
                 .catch((error: AxiosError) => {
                     //this.message = error.message
-                    alert(error.message) // https://www.w3schools.com/js/js_popup.asp
+                    alert(error.message)
                 })
         },
-        deleteCar(deleteId: number) {
+        deleteBook(deleteId: number) {
             let uri: string = baseUri + "/" + deleteId
             axios.delete<void>(uri)
                 .then((response: AxiosResponse<void>) => {
                     this.deleteMessage = response.status + " " + response.statusText
-                    this.getAllCars()
+                    this.getAllBooks()
                 })
                 .catch((error: AxiosError) => {
                     //this.deleteMessage = error.message
                     alert(error.message)
                 })
         },
-        addCar() {
-            axios.post<ICar>(baseUri, this.formData)
+        addBook() {
+            axios.post<IBook>(baseUri, this.formData)
                 .then((response: AxiosResponse) => {
                     let message: string = "response " + response.status + " " + response.statusText
                     this.addMessage = message
-                    this.getAllCars()
+                    this.getAllBooks()
                 })
                 .catch((error: AxiosError) => {
                     // this.addMessage = error.message
